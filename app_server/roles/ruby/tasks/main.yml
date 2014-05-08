@@ -1,0 +1,12 @@
+---
+- name: Add GPG hellobits.com
+  apt_key: url=http://apt.hellobits.com/hellobits.key state=present
+
+- name: Add repos for ruby install
+  copy: src=hellobits.list dest=/etc/apt/sources.list.d/
+
+- name: Install Ruby
+  apt: name=ruby-2.1 update_cache=yes
+
+- name: Install bundler
+  command: gem install bundler --no-rdoc --no-ri

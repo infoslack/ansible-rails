@@ -5,7 +5,8 @@
 
   roles:
     - common
+    - ruby
     - nginx
 
 # ideas for improvement
-# install ruby, rails, unicorn, monit, ufw
+# install unicorn, monit, ufw
