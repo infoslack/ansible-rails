@@ -2,7 +2,6 @@
 
 - Requires Ansible 1.6.1 or newer
 - Expects Ubuntu 12.04 LTS (64 bit)
------------------------------------------------------
 
 ## To use
 
