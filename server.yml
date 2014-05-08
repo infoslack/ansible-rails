@@ -5,8 +5,9 @@
 
   roles:
     - common
+    - firewall
     - ruby
     - nginx
 
 # ideas for improvement
-# install unicorn, monit, ufw
+# install unicorn, monit
