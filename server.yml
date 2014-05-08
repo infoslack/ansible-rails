@@ -1,6 +1,7 @@
 ---
 - name: App Server
   hosts: web
+  sudo: yes
   user: root
 
   roles:
@@ -10,6 +11,7 @@
     - nginx
     - unicorn
     - upstart
+    - monit
     - postgresql
 
 # Use this block to a different node
@@ -19,4 +21,5 @@
 #  user: root
 #
 #  roles:
+#    - common
 #    - postgresql

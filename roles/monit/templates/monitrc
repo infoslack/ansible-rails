@@ -1,0 +1,11 @@
+set daemon 60
+
+set logfile /var/log/monit.log
+set idfile /var/lib/monit/id
+set statefile /var/lib/monit/state
+
+set eventqueue
+  basedir /var/lib/monit/events
+  slots 100
+
+include /etc/monit/conf.d/*
