@@ -8,6 +8,4 @@
     - firewall
     - ruby
     - nginx
-
-# ideas for improvement
-# install unicorn, monit
+    - unicorn

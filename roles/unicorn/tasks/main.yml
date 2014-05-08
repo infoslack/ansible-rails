@@ -1,0 +1,6 @@
+---
+- name: Create dir unicorn config
+  command: mkdir /etc/unicorn
+
+- name: Configure unicorn for project
+  template: src=unicorn dest=/etc/unicorn/app.conf

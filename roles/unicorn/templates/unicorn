@@ -1,0 +1,9 @@
+listen "/tmp/app.sock", :backlog => 64
+worker_processes 2
+timeout 15
+preload_app true
+
+pid "/var/run/unicorn/app.pid"
+stdout_path "/var/log/unicorn/app.log"
+stderr_path "/var/log/unicorn/app-errors.log"
+working_directory "/var/www/app/current"
