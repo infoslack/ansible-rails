@@ -1,0 +1,30 @@
+---
+#TODO: refactor this
+- name: Import the repository signing key PostgreSQL
+  apt_key: url={{psql_url}} state=present
+
+- name: Add repository for install PostgreSQL
+  copy: src=postgres.list dest=/etc/apt/sources.list.d/
+
+- name: Update packages list
+  apt: update_cache=yes
+
+- name: Install PostgreSQL
+  apt: name={{item}} state=present
+  with_items:
+    - postgresql-9.3
+    - postgresql-contrib-9.3
+    - libpq-dev
+    - python-psycopg2
+
+- name: Create database
+  sudo_user: postgres
+  postgresql_db: name={{dbname}}
+
+- name: Ensure user has access to database
+  sudo_user: postgres
+  postgresql_user: db={{dbname}} name={{dbuser}} password={{dbpassword}} priv=ALL
+
+- name: Ensure user does not have unnecessary privilege
+  sudo_user: postgres
+  postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB

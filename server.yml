@@ -1,5 +1,5 @@
 ---
-- name: Install Application Server
+- name: App Server
   hosts: web
   user: root
 
@@ -10,3 +10,13 @@
     - nginx
     - unicorn
     - upstart
+    - postgresql
+
+# Use this block to a different node
+#- name: Database Server
+#  hosts: db
+#  sudo: yes
+#  user: root
+#
+#  roles:
+#    - postgresql

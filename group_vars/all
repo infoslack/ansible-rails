@@ -2,6 +2,12 @@
 # setup
 app_name: demo
 
-# urls
+# postgres
+dbname: demodb
+dbuser: demouser
+dbpassword: demopass
+
+# urls apt-key
 nginx_url: http://nginx.org/keys/nginx_signing.key
 ruby_url: http://apt.hellobits.com/hellobits.key
+psql_url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
