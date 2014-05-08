@@ -1,6 +1,6 @@
 ---
 - name: Add the key used to sign the nginx packages and repository
-  apt_key: url=http://nginx.org/keys/nginx_signing.key state=present
+  apt_key: url={{ nginx_url }} state=present
 
 - name: Add repository for install nginx
   copy: src=nginx.list dest=/etc/apt/sources.list.d/

@@ -1,6 +1,6 @@
 ---
 - name: Add GPG hellobits.com
-  apt_key: url=http://apt.hellobits.com/hellobits.key state=present
+  apt_key: url={{ ruby_url }} state=present
 
 - name: Add repos for ruby install
   copy: src=hellobits.list dest=/etc/apt/sources.list.d/
