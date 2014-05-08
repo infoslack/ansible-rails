@@ -1,4 +1,4 @@
 ---
 - name: Configure upstart for app
-  template: src=upstart dest=/etc/init/web-app.conf
+  template: src=upstart dest=/etc/init/{{ app_name }}.conf
   #notify: restart web-app

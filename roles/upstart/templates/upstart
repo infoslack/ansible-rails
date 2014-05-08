@@ -1,4 +1,4 @@
-description "web-app server config"
+description "{{app_name}} server config"
 
 pre-start script
   mkdir -p /var/log/unicorn
@@ -11,6 +11,6 @@ end script
 start on runlevel [23]
 stop on shutdown
 
-exec sudo -u www-data sh -c "cd /var/www/app/current && RAILS_ENV=production bundle exec unicorn -c /etc/unicorn/app.conf"
+exec sudo -u www-data sh -c "cd /var/www/{{ app_name }}/current && RAILS_ENV=production bundle exec unicorn -c /etc/unicorn/app.conf"
 
 respawn

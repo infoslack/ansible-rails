@@ -1,4 +1,7 @@
 ---
+# setup
+app_name: demo
 
+# urls
 nginx_url: http://nginx.org/keys/nginx_signing.key
 ruby_url: http://apt.hellobits.com/hellobits.key
