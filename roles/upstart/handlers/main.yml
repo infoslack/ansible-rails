@@ -1,0 +1,3 @@
+---
+- name: restart web-app
+  service: name=web-app state=restarted

@@ -1,0 +1,16 @@
+description "web-app server config"
+
+pre-start script
+  mkdir -p /var/log/unicorn
+  chown www-data. /var/log/unicorn
+
+  mkdir -p /var/run/unicorn
+  chown www-data. /var/run/unicorn
+end script
+
+start on runlevel [23]
+stop on shutdown
+
+exec sudo -u www-data sh -c "cd /var/www/app/current && RAILS_ENV=production bundle exec unicorn -c /etc/unicorn/app.conf"
+
+respawn

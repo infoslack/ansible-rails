@@ -9,3 +9,4 @@
     - ruby
     - nginx
     - unicorn
+    - upstart
