@@ -1,0 +1,10 @@
+---
+- name: Install Application Server
+  hosts: web
+  user: root
+
+  roles:
+    - nginx
+
+# ideas for improvement
+# install ruby, rails, unicorn, monit, ufw

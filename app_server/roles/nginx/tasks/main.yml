@@ -1,0 +1,13 @@
+---
+- name: Add the key used to sign the nginx packages and repository
+  apt_key: url=http://nginx.org/keys/nginx_signing.key state=present
+
+- name: Add repository for install nginx
+  copy: src=nginx.list dest=/etc/apt/sources.list.d/
+
+- name: Update packages and install nginx
+  apt: name=nginx update_cache=yes
+
+- name: Copy nginx default configuration
+  copy: src=nginx.conf dest=/etc/nginx/nginx.conf
+  notify: restart nginx
