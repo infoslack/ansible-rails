@@ -4,6 +4,7 @@
   user: root
 
   roles:
+    - common
     - nginx
 
 # ideas for improvement
