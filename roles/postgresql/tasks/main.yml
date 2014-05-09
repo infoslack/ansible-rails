@@ -1,5 +1,4 @@
 ---
-#TODO: refactor this
 - name: Import the repository signing key PostgreSQL
   apt_key: url={{psql_url}} state=present
 
@@ -17,13 +16,29 @@
     - libpq-dev
     - python-psycopg2
 
+- name: Copy custom config and restart
+  copy: src=postgresql.conf dest=/etc/postgresql/9.3/main/
+  notify: restart postgresql
+
+- name: PostgreSQL add extension hstore
+  sudo_user: postgres
+  command: psql template1 -c 'CREATE EXTENSION IF NOT EXISTS "hstore"'
+
+- name: PostgreSQL add extension citext
+  sudo_user: postgres
+  command: psql template1 -c 'CREATE EXTENSION IF NOT EXISTS "citext"'
+
 - name: Create database
   sudo_user: postgres
-  postgresql_db: name={{dbname}}
+  postgresql_db: name={{dbname}} encoding='UTF-8'
 
 - name: Ensure user has access to database
   sudo_user: postgres
-  postgresql_user: db={{dbname}} name={{dbuser}} password={{dbpassword}} priv=ALL
+  postgresql_user: |
+    db={{dbname}}
+    name={{dbuser}}
+    password={{dbpassword}}
+    priv=ALL
 
 - name: Ensure user does not have unnecessary privilege
   sudo_user: postgres
