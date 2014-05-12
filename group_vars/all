@@ -2,7 +2,13 @@
 # setup
 app_name: demo
 
-# postgres
+#ruby select version to install
+ruby_version: ruby-2.1
+
+#postgres select version to install
+psql_version: 9.3
+
+# postgres set configs
 dbname: demodb
 dbuser: demouser
 dbpassword: demopass

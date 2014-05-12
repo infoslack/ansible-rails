@@ -11,8 +11,8 @@
 - name: Install PostgreSQL
   apt: name={{item}} state=present
   with_items:
-    - postgresql-9.3
-    - postgresql-contrib-9.3
+    - postgresql-{{psql_version}}
+    - postgresql-contrib-{{psql_version}}
     - libpq-dev
     - python-psycopg2
 

@@ -6,7 +6,7 @@
   copy: src=hellobits.list dest=/etc/apt/sources.list.d/
 
 - name: Install Ruby
-  apt: name=ruby-2.1 update_cache=yes
+  apt: name={{ruby_version}} update_cache=yes
   tags: ruby
 
 - name: Install bundler
