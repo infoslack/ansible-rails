@@ -5,3 +5,7 @@
     - build-essential
     - git
     - ufw
+
+- name: Create user for deploy
+  user: name=deploy group=www-data comment="Deploy user"
+  tags: create_user
