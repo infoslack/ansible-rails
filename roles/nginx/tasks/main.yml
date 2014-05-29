@@ -1,9 +1,11 @@
 ---
 - name: Add the key used to sign the nginx packages and repository
   apt_key: url={{ nginx_url }} state=present
+  tags: nginx
 
 - name: Add repository for install nginx
   copy: src=nginx.list dest=/etc/apt/sources.list.d/
+  tags: nginx
 
 - name: Update packages and install nginx
   apt: name=nginx update_cache=yes
@@ -12,7 +14,9 @@
 - name: Copy nginx default configuration
   copy: src=nginx.conf dest=/etc/nginx/nginx.conf
   notify: restart nginx
+  tags: nginx
 
 - name: Copy example config default
   template: src=default.conf dest=/etc/nginx/sites/
   notify: restart nginx
+  tags: nginx
