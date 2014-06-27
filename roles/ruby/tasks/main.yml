@@ -1,16 +1,26 @@
 ---
-- name: Add GPG hellobits.com
-  apt_key: url={{ ruby_url }} state=present
+- name: Add GPG Key hellobits.com for ruby install
+  apt_key: url={{ ruby_url }}
   tags: ruby
 
-- name: Add repos for ruby install
-  copy: src=hellobits.list dest=/etc/apt/sources.list.d/
+- name: Add repository for ruby install
+  apt_repository: >
+    repo='{{ruby_repo_install}}'
+    state=present
   tags: ruby
 
 - name: Install Ruby
-  apt: name={{ruby_version}} update_cache=yes
+  apt: >
+    pkg={{ ruby_version }}
+    update_cache=yes
+    cache_valid_time=3600
+    state=latest
+    force=yes
   tags: ruby
 
-- name: Install bundler
-  command: gem install bundler --no-rdoc --no-ri
+- name: Gem install bundler
+  gem: >
+    name=bundler
+    user_install=no
+    state=latest
   tags: ruby
