@@ -7,6 +7,14 @@ ruby_version: ruby-2.1
 ruby_repo_install: 'deb http://apt.hellobits.com/ trusty main'
 ruby_url: http://apt.hellobits.com/hellobits.key
 
+#vars nginx installation
+nginx_url: http://nginx.org/keys/nginx_signing.key
+nginx_repo_install: 'deb http://nginx.org/packages/ubuntu/ trusty nginx'
+nginx_user: www-data
+nginx_group: www-data
+nginx_workers: 2
+nginx_connections: 1024
+
 #postgres select version to install
 psql_version: 9.3
 
@@ -16,5 +24,4 @@ dbuser: demouser
 dbpassword: demopass
 
 # urls apt-key
-nginx_url: http://nginx.org/keys/nginx_signing.key
 psql_url: https://www.postgresql.org/media/keys/ACCC4CF8.asc

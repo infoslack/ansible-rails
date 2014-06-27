@@ -1,9 +1,9 @@
-user www-data www-data;
-worker_processes 2;
+user {{nginx_user}} {{nginx_group}};
+worker_processes {{nginx_workers}};
 pid /var/run/nginx.pid;
 
 events {
-  worker_connections  1024;
+  worker_connections  {{nginx_connections}};
   accept_mutex on; # change to on if worker_processes > 1
   use epoll;
 }
@@ -38,7 +38,7 @@ http {
   types_hash_max_size 4096;
 
   gzip  on;
-  gzip_http_version 1.0;
+  gzip_http_version 1.1;
   gzip_comp_level 6;
   gzip_min_length 500;
   gzip_proxied any;
