@@ -1,45 +1,70 @@
 ---
-- name: Import the repository signing key PostgreSQL
-  apt_key: url={{psql_url}} state=present
+- name: Add GPG Key for PostgreSQL install
+  apt_key: url={{psql_url}}
+  tags: postgresql
 
 - name: Add repository for install PostgreSQL
-  copy: src=postgres.list dest=/etc/apt/sources.list.d/
-
-- name: Update packages list
-  apt: update_cache=yes
+  apt_repository: >
+    repo='{{psql_repo}}'
+    state=present
+  tags: postgresql
 
 - name: Install PostgreSQL
-  apt: name={{item}} state=present
+  apt: "pkg={{item}} state=latest force=yes update_cache=yes"
   with_items:
     - postgresql-{{psql_version}}
     - postgresql-contrib-{{psql_version}}
     - libpq-dev
     - python-psycopg2
+  tags: postgresql
 
 - name: Copy custom config and restart
-  copy: src=postgresql.conf dest=/etc/postgresql/9.3/main/
+  template: >
+    src=postgresql.conf.j2
+    dest=/etc/postgresql/{{psql_version}}/main/postgresql.conf
   notify: restart postgresql
+  tags:
+    - postgresql
+    - config
 
-- name: PostgreSQL add extension hstore
+- name: PostgreSQL add extensions
   sudo_user: postgres
-  command: psql template1 -c 'CREATE EXTENSION IF NOT EXISTS "hstore"'
-
-- name: PostgreSQL add extension citext
-  sudo_user: postgres
-  command: psql template1 -c 'CREATE EXTENSION IF NOT EXISTS "citext"'
+  command: >
+    psql template1 -c 'CREATE EXTENSION IF NOT EXISTS "{{item}}"'
+  with_items:
+    - hstore
+    - citext
+  tags:
+    - postgresql
+    - config
 
 - name: Create database
   sudo_user: postgres
-  postgresql_db: name={{dbname}} encoding='UTF-8'
+  postgresql_db: >
+    name={{dbname}}
+    state=present
+    encoding='UTF-8'
+  tags:
+    - postgresql
+    - config
+    - createdb
 
 - name: Ensure user has access to database
   sudo_user: postgres
-  postgresql_user: |
+  postgresql_user: >
     db={{dbname}}
     name={{dbuser}}
     password={{dbpassword}}
     priv=ALL
+  tags:
+    - postgresql
+    - config
+    - createuser
 
 - name: Ensure user does not have unnecessary privilege
   sudo_user: postgres
   postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
+  tags:
+    - postgresql
+    - config
+    - privileges
