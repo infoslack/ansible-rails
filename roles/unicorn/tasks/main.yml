@@ -3,4 +3,6 @@
   command: mkdir -p /etc/unicorn
 
 - name: Configure unicorn for project
-  template: src=unicorn dest=/etc/unicorn/app.conf
+  template: >
+    src=unicorn.conf.j2
+    dest=/etc/unicorn/{{app_name}}.conf

@@ -1,4 +1,4 @@
 check file restart.txt with path /var/www/{{app_name}}/current/tmp/restart.txt
   if changed timestamp then restart
-  start program = "/sbin/start {{app_name}}"
   stop program = "/sbin/stop {{app_name}}"
+  start program = "/sbin/start {{app_name}}"

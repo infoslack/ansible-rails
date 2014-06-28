@@ -1,6 +1,6 @@
 listen "/tmp/{{ app_name }}.sock", :backlog => 64
-worker_processes 2
-timeout 15
+worker_processes {{ unicorn_workers }}
+timeout {{ unicorn_timeout }}
 preload_app true
 
 pid "/var/run/unicorn/{{ app_name }}.pid"

@@ -11,6 +11,6 @@ end script
 start on runlevel [23]
 stop on shutdown
 
-exec sudo -u www-data sh -c "cd /var/www/{{ app_name }}/current && RAILS_ENV=production bundle exec unicorn -c /etc/unicorn/app.conf"
+exec sudo -u www-data sh -c "cd /var/www/{{app_name}}/current && RAILS_ENV=production bundle exec unicorn -c /etc/unicorn/{{app_name}}.conf"
 
 respawn

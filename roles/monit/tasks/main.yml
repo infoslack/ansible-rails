@@ -3,8 +3,12 @@
   apt: name=monit update_cache=yes
 
 - name: Configure monit
-  template: src=monitrc dest=/etc/monit/monitrc
+  template: >
+    src=monitrc.j2
+    dest=/etc/monit/monitrc
 
 - name: Add monit check rails app
-  template: src=monitapp dest=/etc/monit/conf.d/{{app_name}}.conf
+  template: >
+    src=monitapp.conf.j2
+    dest=/etc/monit/conf.d/{{app_name}}.conf
   notify: restart monit
