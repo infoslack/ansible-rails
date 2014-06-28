@@ -8,7 +8,7 @@
   tags: setup
 
 - name: Create user for deploy
-  user:
+  user: >
     name=deploy
     group=www-data
     comment="Deploy user"
