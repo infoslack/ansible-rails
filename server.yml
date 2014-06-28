@@ -3,6 +3,7 @@
   hosts: web
   sudo: yes
   user: root
+  gather_facts: False
 
   roles:
     - common
@@ -13,6 +14,17 @@
     - upstart
     - monit
     - postgresql
+
+# Use this block to send a message to an IRC channel
+#- name: Alert we are done
+#  hosts: notify
+#  tasks:
+#    - irc: >
+#        server=irc.freenode.net
+#        channel="#channel"
+#        msg="All finished ."
+#        color=red
+#        nick=ansibleAlert
 
 # Use this block to a different node
 #- name: Database Server
