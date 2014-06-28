@@ -4,6 +4,9 @@
 # application name
 app_name: demo
 
+# RAILS_ENV
+rails_env: production
+
 # ruby select version to install
 ruby_version: ruby-2.1
 ruby_repo_install: 'deb http://apt.hellobits.com/ trusty main'

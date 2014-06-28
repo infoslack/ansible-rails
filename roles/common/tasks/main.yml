@@ -1,4 +1,10 @@
 ---
+- name: Set Rails Environment
+  template: >
+    src=env.sh.j2
+    dest=/etc/profile.d/env.sh
+  tags: setup
+
 - name: Install extra packages
   apt: "pkg={{item}} state=latest force=yes update_cache=yes"
   with_items:
