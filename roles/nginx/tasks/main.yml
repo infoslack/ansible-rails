@@ -30,8 +30,20 @@
 - name: Copy example config default
   template: >
     src=default.conf.j2
-    dest=/etc/nginx/sites/default.conf
+    dest=/etc/nginx/conf.d/{{app_name}}.conf
   notify: restart nginx
+  tags:
+    - nginx
+    - config
+
+- name: Create /var/www and set permissions
+  file: >
+    dest=/var/www
+    state=directory
+    recurse=yes
+    owner=deploy
+    group=www-data
+    mode=774
   tags:
     - nginx
     - config

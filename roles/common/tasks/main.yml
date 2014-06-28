@@ -1,11 +1,23 @@
 ---
 - name: Install extra packages
-  apt: name={{ item }} state=present
+  apt: "pkg={{item}} state=latest force=yes update_cache=yes"
   with_items:
     - build-essential
     - git
     - ufw
+  tags: setup
 
 - name: Create user for deploy
-  user: name=deploy group=www-data comment="Deploy user"
-  tags: create_user
+  user:
+    name=deploy
+    group=www-data
+    comment="Deploy user"
+    state=present
+  tags: setup
+
+- name: Add public key to authorized_keys
+  authorized_key: >
+    user=deploy
+    state=present
+    key="{{lookup('file', '~/.ssh/id_rsa.pub')}}"
+  tags: setup
