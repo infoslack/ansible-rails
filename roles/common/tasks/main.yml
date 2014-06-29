@@ -11,6 +11,14 @@
     - build-essential
     - git
     - ufw
+    - ntp
+  tags: setup
+
+- name: Configure NTP (Network Time Protocol)
+  template: >
+    src=timezone.j2
+    dest=/etc/timezone
+  notify: update tzdata
   tags: setup
 
 - name: Create user for deploy
