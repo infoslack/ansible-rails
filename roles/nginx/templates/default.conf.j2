@@ -3,9 +3,9 @@ upstream {{app_name}} {
 }
 
 server {
-  listen 80;
+  listen {{nginx_port}};
   client_max_body_size 2M;
-  server_name localhost;
+  server_name {{nginx_hostname}};
   keepalive_timeout 5;
   root /var/www/{{app_name}}/current/public;
   access_log  off;
