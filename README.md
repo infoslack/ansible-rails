@@ -3,25 +3,25 @@
 - Requires Ansible 1.6.1 or newer
 - Expects Ubuntu 14.04 LTS (64 bit)
 
-## To use
+## Info
 
 - This ROR stack can be on a single node or multiple nodes.
 The inventory file `hosts` defines the nodes in wich the stacks
 should be configured.
-- Copy the `hosts.example` file to `hosts` and edit the `hosts`
-inventory file to include the names or URLs of the servers
-you want to deploy.
+
+## Setup and use
+
+      $ git clone https://github.com/infoslack/simple-ansible.git
+      $ cd simple-ansible
+      $ cp hosts.example hosts
+
+- Change the **app_name** variable located in `group_vars/all` to the name of your application.
+- Edit `hosts` and include the name servers `123.456.789.10` or `example.org`.
+- You can change the rules or the order of execution in `server.yml`
 
 Run the playbook:
 
-      ansible-playbook -i hosts server.yml
-
-## To setup your project
-
-- Change the **app_name** variable located in `group_vars/all` to the name
-of your application.
-
-TODO:Write more instructions!
+      $ ansible-playbook -i hosts server.yml
 
 ## Contributing
 
