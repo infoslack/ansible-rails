@@ -7,7 +7,7 @@
 
   roles:
     - common
-    - firewall
+    - ufw
     - ruby
     - nginx
     - unicorn
