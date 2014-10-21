@@ -30,7 +30,7 @@
 - name: Copy example config default
   template: >
     src=default.conf.j2
-    dest=/etc/nginx/conf.d/{{app_name}}.conf
+    dest=/etc/nginx/sites/{{app_name}}.conf
   notify: restart nginx
   tags:
     - nginx
