@@ -34,7 +34,7 @@ monit_time: 60
 
 # postgres installation
 psql_version: 9.3
-psql_repo: 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main'
+psql_repo: 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main'
 psql_url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
 
 # postgres set configs
