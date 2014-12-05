@@ -1,5 +1,8 @@
 description "{{app_name}} server config"
 
+start on started {{app_name}}
+stop on stopped {{app_name}}
+
 pre-start script
   mkdir -p /var/log/unicorn
   chown www-data. /var/log/unicorn
@@ -8,9 +11,7 @@ pre-start script
   chown www-data. /var/run/unicorn
 end script
 
-start on runlevel [23]
-stop on shutdown
-
-exec sudo -u www-data sh -c "cd /var/www/{{app_name}}/current && RAILS_ENV=production bundle exec unicorn -c /etc/unicorn/{{app_name}}.conf"
-
+chdir /var/www/{{app_name}}/current/
 respawn
+
+exec sudo -u www-data sh -c "bundle exec unicorn -c /etc/unicorn/{{app_name}}.conf -E production"
