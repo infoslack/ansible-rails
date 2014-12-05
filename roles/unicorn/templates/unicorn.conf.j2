@@ -1,9 +1,26 @@
-listen "/tmp/{{ app_name }}.sock", :backlog => 64
-worker_processes {{ unicorn_workers }}
+worker_processes Integer(ENV["WEB_CONCURRENCY"] || {{ unicorn_workers }})
 timeout {{ unicorn_timeout }}
 preload_app true
+listen "/tmp/{{ app_name }}.sock"
 
 pid "/var/run/unicorn/{{ app_name }}.pid"
 stdout_path "/var/log/unicorn/{{ app_name }}.log"
 stderr_path "/var/log/unicorn/{{ app_name }}-errors.log"
 working_directory "/var/www/{{ app_name }}/current"
+
+before_fork do |server, worker|
+  Signal.trap 'TERM' do
+    puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
+    Process.kill 'QUIT', Process.pid
+  end
+
+  defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
+end
+
+after_fork do |server, worker|
+  Signal.trap 'TERM' do
+    puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
+  end
+
+  defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
+end

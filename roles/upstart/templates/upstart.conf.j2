@@ -14,4 +14,4 @@ end script
 chdir /var/www/{{app_name}}/current/
 respawn
 
-exec sudo -u www-data sh -c "bundle exec unicorn -c /etc/unicorn/{{app_name}}.conf -E production"
+exec sudo -u www-data sh -c "bundle exec unicorn -c /etc/unicorn/{{app_name}}.rb -E production"

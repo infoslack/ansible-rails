@@ -5,4 +5,4 @@
 - name: Configure unicorn for project
   template: >
     src=unicorn.conf.j2
-    dest=/etc/unicorn/{{app_name}}.conf
+    dest=/etc/unicorn/{{app_name}}.rb
