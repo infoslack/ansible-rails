@@ -3,5 +3,4 @@
   template: >
     src=upstart.conf.j2
     dest=/etc/init/{{app_name}}.conf
-  notify: restart {{app_name}}
   tags: upstart
