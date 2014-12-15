@@ -9,6 +9,7 @@
   apt: "pkg={{item}} state=latest force=yes update_cache=yes"
   with_items:
     - build-essential
+    - unattended-upgrades
     - git
     - ufw
     - ntp
@@ -34,4 +35,16 @@
     user=deploy
     state=present
     key="{{lookup('file', '~/.ssh/id_rsa.pub')}}"
+  tags: setup
+
+- name: Configure unattended upgrades
+  template: >
+    src=50unattended-upgrades.j2
+    dest=/etc/apt/apt.conf.d/50unattended-upgrades
+  tags: setup
+
+- name: Configure time for unattended upgrades
+  template: >
+    src=10periodic.j2
+    dest=/etc/apt/apt.conf.d/10periodic
   tags: setup
