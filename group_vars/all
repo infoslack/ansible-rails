@@ -11,19 +11,23 @@ rails_env: production
 time_zone: 'America/Brasilia'
 
 # ruby select version to install
-ruby_version: ruby-2.1
+ruby_version: ruby-2.2
 ruby_repo_install: 'deb [arch=amd64] http://apt.hellobits.com/ trusty main'
 ruby_url: http://apt.hellobits.com/hellobits.key
 
 # nginx installation
 nginx_url: http://nginx.org/keys/nginx_signing.key
 nginx_repo_install: 'deb http://nginx.org/packages/ubuntu/ trusty nginx'
+
+# nginx configure
 nginx_user: www-data
 nginx_group: www-data
 nginx_workers: 2
 nginx_connections: 1024
 nginx_port: 80
 nginx_hostname: localhost
+nginx_frame_opt: DENY #(DENY | SAMEORIGIN | ALLOW-FROM)
+nginx_accept_mutex: on # if worker_processes > 1 change to on
 
 # unicorn config
 unicorn_workers: 2

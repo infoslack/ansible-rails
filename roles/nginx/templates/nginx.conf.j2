@@ -4,7 +4,7 @@ pid /var/run/nginx.pid;
 
 events {
   worker_connections  {{nginx_connections}};
-  accept_mutex on; # change to on if worker_processes > 1
+  accept_mutex {{nginx_accept_mutex}};
   use epoll;
 }
 
@@ -23,7 +23,7 @@ http {
   tcp_nopush          on;
 
   add_header X-Content-Type-Options nosniff;
-  add_header X-Frame-Options DENY;
+  add_header X-Frame-Options {{nginx_frame_opt}};
   add_header X-XSS-Protection "1; mode=block";
   add_header Strict-Transport-Security max-age=31536000;
 
