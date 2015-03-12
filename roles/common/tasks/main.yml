@@ -35,19 +35,19 @@
     user=deploy
     state=present
     key="{{lookup('file', '~/.ssh/id_rsa.pub')}}"
-  tags: setup
+  tags: pubkey
 
 # Add the public keys of the allowed list
 # Set up authorized_keys for the deploy user
 #
 #- name: Add authorized_keys for the deploy user
-#  authorized_keys: >
+#  authorized_key: >
 #    user=deploy
 #    key="{{item}}"
 #
 #  with_items:
-#    - https://github.com/infoslack.keys
-#    - https://github.com/example.keys
+#   - https://github.com/infoslack.keys
+#   - https://github.com/example.keys
 #
 #  or
 #
