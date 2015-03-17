@@ -19,7 +19,8 @@
   template: >
     src=timezone.j2
     dest=/etc/timezone
-  notify: update tzdata
+  command: dpkg-reconfigure --frontend noninteractive tzdata
+  notify: restart ntp
   tags: setup
 
 - name: Create user for deploy

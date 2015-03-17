@@ -1,3 +1,6 @@
 ---
-- name: update tzdata
-  command: /usr/sbin/dpkg-reconfigure --frontend noninteractive tzdata
+- name: restart ntp
+  service: name=ntp state=restarted
+
+- name: reload ntp
+  service: name=ntp state=reloaded
