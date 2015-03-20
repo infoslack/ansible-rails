@@ -15,10 +15,13 @@
     - ntp
   tags: setup
 
-- name: Configure NTP (Network Time Protocol)
+- name: Copy config file NTP (Network Time Protocol)
   template: >
     src=timezone.j2
     dest=/etc/timezone
+  tags: setup
+
+- name: Configure NTP
   command: dpkg-reconfigure --frontend noninteractive tzdata
   notify: restart ntp
   tags: setup
