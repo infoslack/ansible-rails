@@ -27,7 +27,7 @@ nginx_connections: 1024
 nginx_port: 80
 nginx_hostname: localhost
 nginx_frame_opt: DENY #(DENY | SAMEORIGIN | ALLOW-FROM)
-nginx_accept_mutex: on # if worker_processes > 1 change to on
+nginx_accept_mutex: 'on' # if worker_processes > 1 change to on
 
 # unicorn config
 unicorn_workers: 2

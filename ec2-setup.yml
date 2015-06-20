@@ -1,0 +1,26 @@
+---
+- hosts: local
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Provision an EC2 node
+      ec2:
+        key_name: infoslack
+        group: ansible
+        instance_type: t2.micro
+        image: ami-d05e75b8
+        ec2_url: ec2.us-east-1.amazonaws.com
+        region: us-east-1
+        vpc_subnet_id: subnet-5f698206
+        wait: yes
+        count: 1
+        assign_public_ip: yes
+      register: ec2
+
+# http://docs.ansible.com/ec2_module.html
+# Requirements: boto
+# Configure boto or set export:
+#
+# aws_access_key_id = somekeyid
+# aws_secret_access_key = someaccesskey
